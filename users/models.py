@@ -5,6 +5,15 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
+class Language(models.Model):
+    name = models.CharField(max_length=60)
+    shortage = models.CharField(max_length=5)
+
+    def __str__(self):
+        return self.name
+    
+
+
 class User(AbstractUser):
     COUNTRY_CHOICES = (
         ('Uzbekistan', 'Uzbekistan'),
@@ -32,6 +41,7 @@ class User(AbstractUser):
     country = models.CharField(max_length=25, choices=COUNTRY_CHOICES, blank=True, null=True)
     followers = models.ManyToManyField('self', blank=True)
     followings = models.ManyToManyField('self', blank=True)
+    languages = models.ManyToManyField(Language, blank=True)
 
     def __str__(self) -> str:
         return super().username
