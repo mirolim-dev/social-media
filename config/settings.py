@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'ckeditor',
+    'ckeditor_uploader',
+    
     'users',
+    'post',
+    
 ]
 
 MIDDLEWARE = [
@@ -123,6 +129,9 @@ STATIC_ROOT = 'static_root/'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = 'media/'
+
+CKEDITOR_UPLOAD_PATH = 'ck-uploads/'
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
