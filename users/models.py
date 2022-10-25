@@ -1,5 +1,4 @@
-from random import choices
-from secrets import choice
+from django.contrib import admin
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -45,3 +44,12 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         return super().username
+
+    
+    @admin.display(description='followers')
+    def number_of_followers(self):
+        return f'{self.followers.count()}'
+
+    @admin.display(description='followings')
+    def number_of_followings(self):
+        return f'{self.followings.count()}'

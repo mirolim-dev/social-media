@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
+from .forms import RegisterForm
 # Create your views here.
 
 def home(request):
@@ -20,7 +21,19 @@ def sign_in(request):
 
 
 def sign_up(request):
-    return render(request, 'signup.html')
+    form = RegisterForm() 
+    if request.POST:
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print('form saved')
+            return redirect('home')
+        else:
+            print('data is not valid')
+    context = {
+        'form': form,
+    }
+    return render(request, 'signup.html', context)
 
 
 def account_settings(request):

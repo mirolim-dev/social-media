@@ -1,5 +1,4 @@
-from enum import auto
-from turtle import width
+from django.contrib import admin
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 
@@ -20,17 +19,20 @@ class Post(models.Model):
     def __str__(self) -> str:
         return self.title
     
+    @admin.display(description='views')
     def number_ob_views(self):
         return self.viewers.count()
     
+    @admin.display(description='likes')
     def number_ob_likes(self):
         return self.likers.count()
 
     def get_all_comments(self):
         return self.comment_set.all()
 
+    @admin.display(description='comments')
     def number_of_comments(self):
-        return self.get_all_comments().count()
+        return self.get_all_comments().count() + self.rewritedcomment_set.all().count()
 
 
 class Comment(models.Model):
@@ -47,7 +49,8 @@ class Comment(models.Model):
     def get_all_rewrited_comments(self):
         r_comments = self.rewritedcomment_set.all()
         return r_comments
-    
+        
+    @admin.display(description='rewrited_comments')
     def number_of_rewrited_comments(self):
         return self.get_all_rewrited_comments().count()
 

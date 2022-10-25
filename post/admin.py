@@ -4,7 +4,7 @@ from .models import Post, Comment, RewritedComment
 # Register your models here.
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['author', 'title', 'uploaded_at', 'updated_at']
+    list_display = ['author', 'title', 'number_of_comments','uploaded_at', 'updated_at']
 
 
 class CommentAdmin(admin.ModelAdmin):
