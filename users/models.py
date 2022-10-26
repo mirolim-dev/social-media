@@ -54,3 +54,10 @@ class User(AbstractUser):
     @admin.display(description='followings')
     def number_of_followings(self):
         return f'{self.followings.count()}'
+
+    def get_posts_by_followings(self, numb:int):
+        """ nums -> how many posts you want to take from followings"""
+        posts = []
+        for i in self.followings.all():
+            posts.extend(self.post_set.all()[:numb])
+        return posts

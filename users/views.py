@@ -10,6 +10,10 @@ from .forms import RegisterForm
 # Create your views here.
 
 def home(request):
+    user = request.user
+    # user = User.objects.get(username=request.user.username)
+    posts = user.get_posts_by_followings(2)
+    print(user, posts)
     return render(request, 'index.html')
 
 
