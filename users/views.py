@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render
 
+from users.models import User
+
 from .forms import RegisterForm
 # Create your views here.
 
@@ -38,3 +40,13 @@ def sign_up(request):
 
 def account_settings(request):
     return render(request, 'account-setting.html')
+
+
+def follow(request, pk):
+    user = request.user
+    user1 = User.objects.get(id=pk)
+    user1.followings.add(user)
+    user.followers.add(user1)
+    user.save()
+    user1.save()
+    return redirect('home')

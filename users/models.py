@@ -34,6 +34,7 @@ class User(AbstractUser):
         ('46-60', '46-60'),
         ('61-', '61-'),
     )
+    avatar = models.ImageField(upload_to='profile', blank=True, null=True)
     alternative_email = models.EmailField(blank=True, null=True)
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
     age = models.CharField(max_length=5, choices=AGE_CHOICES, blank=True, null=True)
