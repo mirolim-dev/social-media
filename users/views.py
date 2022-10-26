@@ -1,5 +1,9 @@
-from django.shortcuts import redirect, render
+import django
 
+
+from django.contrib import messages
+from django.shortcuts import redirect, render
+from django.contrib.auth import login, authenticate
 from users.models import User
 
 from .forms import RegisterForm
@@ -19,6 +23,16 @@ def settings(request):
 
 
 def sign_in(request):
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            print('login')
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Username or password is incorrect')
     return render(request, 'signin.html')
 
 
