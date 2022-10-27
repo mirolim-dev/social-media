@@ -61,3 +61,25 @@ class User(AbstractUser):
         for i in self.followings.all():
             posts.extend(self.post_set.all()[:numb])
         return posts
+
+    
+class Contact(models.Model):
+    class Meta:
+        verbose_name = 'Contact'
+        verbose_name_plural = 'Contacts'
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    website = models.CharField(max_length=250, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return f'{self.user}'
+    
+
+class SocialMedia(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=60)
+    link = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
