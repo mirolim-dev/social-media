@@ -16,6 +16,9 @@ class UserAdmin(admin.ModelAdmin):
     inlines = [SocialMediaAdmin]
 
 
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'phone', 'email', 'website']
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Language, LanguageAdmin)
+admin.site.register(Contact, ContactAdmin)
